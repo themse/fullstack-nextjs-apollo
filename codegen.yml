@@ -1,0 +1,50 @@
+overwrite: true
+schema: ${GRAPHQL_SCHEMA_PATH}
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+generates:
+  src/client/services/apollo/generated/base-types.ts:
+    plugins:
+      - typescript
+      - add:
+          content: "/* WARNING: THIS FILE IS GENERATED, DO NOT EDIT! */\n/* eslint-disable */"
+    config:
+      reactApolloVersion: 3
+      skipTypename: true
+      namingConvention:
+        enumValues: keep
+  src/client/services/apollo/generated/:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: base-types.ts
+      importTypesNamespace: SchemaTypes
+      folder: '../generated/hooks'
+    documents: ['src/client/services/apollo/queries/*.ts', 'src/client/services/apollo/mutations/*.ts']
+    plugins:
+      - add:
+          content: "/* WARNING: THIS FILE IS GENERATED, DO NOT EDIT! */\n/* eslint-disable */"
+      - typescript-operations
+      - typescript-react-apollo
+      - named-operations-object
+    config:
+      reactApolloVersion: 3
+      withHOC: false
+      withComponent: false
+      withHooks: true
+      identifierName: ListAllOperations
+  src/client/services/apollo/generated/helpers.ts:
+    plugins:
+      - add:
+          content: "/* WARNING: THIS FILE IS GENERATED, DO NOT EDIT! */\n/* eslint-disable */"
+      - typescript-apollo-client-helpers
+    config:
+      requireKeyFields: true
+  schema.graphql:
+    plugins:
+      - schema-ast
+    config:
+      reactApolloVersion: 3
+      includeDirectives: true
+      namingConvention:
+        enumValues: keep
