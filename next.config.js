@@ -10,7 +10,14 @@ const nextConfig = {
   },
   serverRuntimeConfig: {
     // Will only be available on the server side
-    GITHUB_API_URL: process.env.GITHUB_API_URL,
+    DB_CLIENT: process.env.DB_CLIENT,
+    DB_HOST: process.env.DB_HOST,
+    DB_PORT: process.env.DB_PORT,
+    DB_NAME: process.env.POSTGRES_DB,
+    DB_USER: process.env.POSTGRES_USER,
+    DB_PASSWORD: process.env.POSTGRES_PASSWORD,
+
+    APOLLO_SERVER_PORT: process.env.APOLLO_SERVER_PORT || 4000,
   },
   publicRuntimeConfig: {
     // Will be available on both server and client

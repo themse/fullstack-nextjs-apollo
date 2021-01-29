@@ -1,0 +1,17 @@
+scalar GraphbackDateTime
+
+"""
+@model
+"""
+type Product {
+  id: ID!
+  title: String!
+  description: String!
+  discount: Int
+  createdAt: GraphbackDateTime
+  updatedAt: GraphbackDateTime
+}
+
+type Query {
+  getAllProducts: [Product]!
+}

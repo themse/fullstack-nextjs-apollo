@@ -17,7 +17,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/prop-types': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
-    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // TODO
     'no-param-reassign': ['error', { props: true }],

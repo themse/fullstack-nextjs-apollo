@@ -1,7 +1,10 @@
 {
-  "name": "next-apollo",
+  "name": "fullstack-apollo-skeleton",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Den <Themse> Polusmyak"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,21 +13,29 @@
     "format": "prettier --write .",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "lint:fix": "yarn lint --fix",
-    "codegen": "graphql-codegen --require dotenv/config --config codegen.yml"
+    "codegen:client": "graphql-codegen --require dotenv/config",
+    "codegen:server": "graphback generate",
+    "generate": "yarn codegen:server && yarn codegen:client"
   },
   "dependencies": {
     "@apollo/client": "^3.2.5",
-    "apollo-server-micro": "^2.19.0",
-    "axios": "^0.21.0",
+    "@graphback/runtime-knex": "^1.1.0",
+    "apollo-server-express": "^2.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "graphback": "^1.1.0",
     "graphql": "^15.4.0",
+    "graphql-config": "^3.2.0",
+    "graphql-migrations": "^1.1.0",
+    "knex": "^0.21.16",
     "next": "10.0.0",
+    "pg": "^8.5.1",
     "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "swr": "^0.3.8"
+    "react-dom": "17.0.1"
   },
   "devDependencies": {
+    "@graphql-cli/codegen": "^1.17.18",
     "@graphql-codegen/add": "^2.0.1",
-    "@graphql-codegen/cli": "1.19.0",
     "@graphql-codegen/named-operations-object": "^1.17.8",
     "@graphql-codegen/near-operation-file-preset": "^1.17.13",
     "@graphql-codegen/schema-ast": "^1.17.8",
@@ -33,6 +44,8 @@
     "@graphql-codegen/typescript-operations": "^1.17.8",
     "@graphql-codegen/typescript-react-apollo": "^2.1.1",
     "@next/bundle-analyzer": "^10.0.3",
+    "@types/glob": "^7.1.3",
+    "@types/graphql": "^14.5.0",
     "@types/node": "^14.14.6",
     "@types/react": "^16.9.55",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
@@ -41,6 +54,8 @@
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.21.5",
+    "graphback-cli": "^1.1.0",
+    "graphql-cli": "^4.1.0",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.1",
     "next-compose-plugins": "^2.2.1",
