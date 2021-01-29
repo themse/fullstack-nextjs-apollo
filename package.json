@@ -6,16 +6,17 @@
     "name": "Den <Themse> Polusmyak"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "client:dev": "next dev",
+    "client:build": "next build",
+    "client:start": "next start",
+    "server:dev": "ts-node src/server/index.ts",
+    "codegen:client": "graphql-codegen --require dotenv/config",
+    "codegen:server": "graphback generate",
+    "generate": "yarn codegen:server && yarn codegen:client",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
     "lint": "eslint . --ext ts --ext tsx --ext js",
-    "lint:fix": "yarn lint --fix",
-    "codegen:client": "graphql-codegen --require dotenv/config",
-    "codegen:server": "graphback generate",
-    "generate": "yarn codegen:server && yarn codegen:client"
+    "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
     "@apollo/client": "^3.2.5",
@@ -60,6 +61,7 @@
     "lint-staged": "^10.5.1",
     "next-compose-plugins": "^2.2.1",
     "prettier": "^2.1.2",
+    "ts-node": "^9.1.1",
     "typescript": "^4.0.5"
   }
 }

@@ -1,7 +1,6 @@
-# schema: ${GRAPHQL_SCHEMA_PATH}
 schema:
-  - src/common/graphql/my-schema.graphql
-  - ${GRAPHQL_SCHEMA_PATH}
+  src/common/graphql/my-schema.graphql
+  # - ${GRAPHQL_SCHEMA_PATH}
 extensions:
   graphback:
     model: src/server/services/graphql/models/**/*.graphql
@@ -29,7 +28,7 @@ extensions:
             GraphbackTimestamp: number
             GraphbackObjectID: string
             GraphbackJSON: any
-            GraphbackJSONObject: "{ [key: string]: any }"
+            GraphbackJSONObject: '{ [key: string]: any }'
           reactApolloVersion: 3
           skipTypename: true
           namingConvention:
@@ -39,12 +38,8 @@ extensions:
         presetConfig:
           baseTypesPath: base-types.ts
           importTypesNamespace: SchemaTypes
-          folder: "../generated/hooks"
-        documents:
-          [
-            "src/client/services/apollo/queries/*.ts",
-            "src/client/services/apollo/mutations/*.ts",
-          ]
+          folder: '../generated/hooks'
+        documents: ['src/client/services/apollo/queries/*.ts', 'src/client/services/apollo/mutations/*.ts']
         plugins:
           - add:
               content: "/* WARNING: THIS FILE IS GENERATED, DO NOT EDIT! */\n/* eslint-disable */"

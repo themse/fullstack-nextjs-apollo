@@ -98,7 +98,7 @@ $ yarn generate
 
 This will update the generated `my-schema.graphql` file.
 
-Running `yarn generate` executes a script which relies on [Graphback CLI](https://graphback.dev/docs/cli/graphback-cli.
+Running `yarn generate` executes a script which relies on [Graphback CLI](https://graphback.dev/docs/cli/graphback-cli).
 
 > NOTE: You have to run the above commands on each modification of your business model on the server-side. This ensures that the client is kept in sync with changes on the server-side.
 

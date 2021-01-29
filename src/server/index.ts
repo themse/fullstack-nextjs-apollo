@@ -1,18 +1,15 @@
-import http from 'http';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
 import express from 'express';
 import { buildGraphbackAPI } from 'graphback';
-import getConfig from 'next/config';
 import { migrateDB } from 'graphql-migrations';
 import { loadConfigSync } from 'graphql-config';
+import http from 'http';
 
 import { provider, loadDbConfig } from './services/datasource';
 import { GraphbackExtension } from './services/extensions';
-
-const {
-  serverRuntimeConfig: { APOLLO_SERVER_PORT },
-} = getConfig();
 
 const app = express();
 app.use(cors());
@@ -33,7 +30,7 @@ migrateDB(loadDbConfig(), typeDefs, {
   // operationFilter: removeNonSafeOperationsFilter
 })
   .then(() => console.info('Migrated database!'))
-  .catch((error) => console.error('Error with migration: ', error.message));
+  .catch((error) => console.error('Migration Error: ', error.message));
 
 const apolloServer = new ApolloServer({
   typeDefs,
@@ -47,6 +44,6 @@ apolloServer.applyMiddleware({ app });
 const httpServer = http.createServer(app);
 apolloServer.installSubscriptionHandlers(httpServer);
 
-app.listen({ port: APOLLO_SERVER_PORT }, () => {
-  console.info(`🚀 Apollo Server on http://localhost:${APOLLO_SERVER_PORT}/graphql`);
+app.listen({ port: process.env.APOLLO_SERVER_PORT || 4000 }, () => {
+  console.info(`🚀 Apollo Server on http://localhost:${process.env.APOLLO_SERVER_PORT || 4000}/graphql`);
 });

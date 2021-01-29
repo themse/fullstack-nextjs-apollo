@@ -1,11 +1,17 @@
-version: "3.6"
+version: '3.7'
 
 services:
   postgres:
-    image: postgres:11.10
+    container_name: fs-apollo-db
+    image: postgres:12
+    restart: always
     ports:
-      - "55432:5432"
+      - '55432:5432'
     environment:
-      - "POSTGRES_DB: ${POSTGRES_DB}"
-      - "POSTGRES_USER: ${POSTGRES_USER}"
-      - "POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}"
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - fs-apollo-db:/var/lib/postgresql/data
+volumes:
+  fs-apollo-db:

@@ -1,12 +1,7 @@
-import Knex, { StaticConnectionConfig } from 'knex';
-import getConfig from 'next/config';
-
-const {
-  serverRuntimeConfig: { DB_CLIENT, DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD },
-} = getConfig();
+import Knex, { PgConnectionConfig } from 'knex';
 
 export interface ConfigInterface extends Knex.Config {
-  connection: StaticConnectionConfig;
+  connection: PgConnectionConfig;
 }
 
 const defaultConfig: ConfigInterface = {
@@ -24,17 +19,20 @@ const defaultConfig: ConfigInterface = {
   },
 };
 
-const connection: ConfigInterface = {
-  ...(DB_NAME && { database: DB_NAME }),
-  ...(DB_HOST && { host: DB_HOST }),
-  ...(DB_PORT && { port: DB_PORT }),
-  ...(DB_USER && { user: DB_USER }),
-  ...(DB_PASSWORD && { password: DB_PASSWORD }),
+// TODO fix ts error
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const connection: PgConnectionConfig = {
+  ...(process.env.DB_HOST && { host: process.env.DB_HOST }),
+  ...(process.env.DB_PORT && { port: process.env.DB_PORT }),
+  ...(process.env.POSTGRES_DB && { database: process.env.POSTGRES_DB }),
+  ...(process.env.POSTGRES_USER && { user: process.env.POSTGRES_USER }),
+  ...(process.env.POSTGRES_PASSWORD && { password: process.env.POSTGRES_PASSWORD }),
 };
 
 export default (): ConfigInterface => {
   return {
-    client: DB_CLIENT || defaultConfig.client,
+    client: process.env.DB_CLIENT || defaultConfig.client,
     connection: { ...defaultConfig.connection, ...connection },
     pool: defaultConfig.pool,
   };

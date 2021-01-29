@@ -36,3 +36,4 @@ yarn-error.log*
 
 /draft
 /schema.graphql
+/.server-build

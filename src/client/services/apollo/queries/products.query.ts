@@ -5,7 +5,6 @@ export const getAllProducts = gql`
     getAllProducts {
       title
       description
-      discount
     }
   }
 `;
